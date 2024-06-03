@@ -1,5 +1,5 @@
 #patient sequence:
-str1 = "125341679"
+str1 = "12309182"
 
 #displayed sequence
 str2 = "123456789"
@@ -52,7 +52,9 @@ def find_differences(str1, str2):
                 j -= 1
 
     while i > 0:
-        differences.append(f"Delete '{str1[i - 1]}' from str1 at position {i-1}")
+        differences.append(f"'{str1[i - 1]}' was added at position{i-1}")
+        edited = edited[:i-1] + f"[{edited[i-1]}]"  + edited[i:]
+        add_err += 1
         i -= 1
 
     while j > 0:
@@ -60,9 +62,11 @@ def find_differences(str1, str2):
         edited = edited[:j-1] + "_" + edited[j-1:]
         j -= 1
     print(edited, str2)
+
     print(f"Addition Errors: {add_err}\n"
       f"Omission Errors: {omi_err}\n"
       f"Transposition and Substitution Errors: {sub_and_trans_err}")
+    
     return differences[::-1]
 
 
