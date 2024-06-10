@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEM Scoresheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .sub-title {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+        .box {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .info p {
+            margin: 0 10px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .dem-ratio {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .dem-ratio .value {
+            border: 1px solid #000;
+            padding: 5px;
+            margin-left: 10px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">DEM Scoresheet</div>
+
+        <div class="info">
+            <p>Name: {{ patient_name }}</p>
+            <p>DOB: {{ date_of_birth }}</p>
+            <p>Age: {{ age }}</p>
+        </div>
+
+        <div class="box">
+            <p>Addition Errors = [ ]</p>
+            <p>Omission Errors = _</p>
+            <p>Transposition and Substitution Errors = ( )</p>
+        </div>
+
+        <div class="sub-title">Test A</div>
+        <p>Answer Key: {{ answer_key_1 }}</p>
+        <p>Patient Answers: {{ marker_results_1 }}</p>
+        <p>Duration: {{ rounded_duration_1 }} seconds</p>
+
+        <div class="sub-title">Test B</div>
+        <p>Answer Key: {{ answer_key_2 }}</p>
+        <p>Patient Answers: {{ marker_results_2 }}</p>
+        <p>Duration: {{ rounded_duration_2 }} seconds</p>
+
+        <div class="sub-title">Test C</div>
+        <p>Answer Key: {{ answer_key_3 }}</p>
+        <p>Patient Answers: {{ marker_results_3 }}</p>
+        <p>Duration: {{ rounded_duration_3 }} seconds</p>
+
+        <div class="box">
+            <p>Substitution and Transposition Errors: {{ sub_and_trans_err }}</p>
+            <p>Omission Errors: {{ omi_err }}</p>
+            <p>Addition Errors: {{ add_err }}</p>
+        </div>
+
+        <div class="box">
+            <p>Total Vertical Time: {{ total_vertical_time }} seconds</p>
+            <p>Horizontal Time: {{ total_horizontal_time }} seconds</p>
+            <p>Adjusted Horizontal Time: {{ adjusted_horizontal_time }} seconds</p>
+            <p>Total Errors: {{ total_errors_num }}</p>
+        </div>
+
+        <div class="dem-ratio">
+            <span>DEM Ratio</span>
+            <span class="value">{{ DEM_ratio }}</span>
+        </div>
+    </div>
+</body>
+</html>

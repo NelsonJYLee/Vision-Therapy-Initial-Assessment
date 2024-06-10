@@ -1,7 +1,19 @@
 from marker import find_differences
 from transcriber import recognize_from_microphone
+import jinja2
+import pdfkit
+import os
+from datetime import datetime
 
-def DEM_test():   
+def DEM_test():
+
+    patient_name = input("Patient Name (Firstname, Lastname): ")
+    date_of_birth = input("Date of Birth (mm/dd/yyyy): ")
+    age = input("Age: ")
+
+    continue_to_1 = input("Continue to Test 1? (y/n)")
+    if continue_to_1 == "n":
+        return
 
     total_errors = {
         "add_err": 0,
@@ -146,6 +158,57 @@ def DEM_test():
     print(f"Adjusted Horizontal Time: {adjusted_horizontal_time}")
     print(f"Total Errors: {total_errors_num}")
     print(f"DEM Ratio: {DEM_ratio}")
+
+    make_pdf = input("Make PDF? (y/n)")
+    if make_pdf == "n":
+        return
+    
+    context = {
+        "patient_name": patient_name,
+        "date_of_birth": date_of_birth,
+        "age": age,
+
+        "answer_key_1": answer_key_1,
+        "marker_results_1": marker_results_1,
+        "rounded_duration_1": rounded_duration_1,
+
+        "answer_key_2": answer_key_2,
+        "marker_results_2": marker_results_2,
+        "rounded_duration_2": rounded_duration_2,
+
+        "answer_key_3": answer_key_3,
+        "marker_results_3": marker_results_3,
+        "rounded_duration_3": rounded_duration_3,
+
+        "sub_and_trans_err": total_errors["sub_and_trans_err"],
+        "omi_err": total_errors["omi_err"],
+        "add_err": total_errors["add_err"],
+
+        "total_vertical_time": total_vertical_time,
+        "total_horizontal_time": total_horizontal_time,
+        "adjusted_horizontal_time": adjusted_horizontal_time,
+        "total_errors_num": total_errors_num,
+
+        "DEM_ratio": DEM_ratio
+    }
+
+    #html to pdf set-up
+    template_loader = jinja2.FileSystemLoader("./")
+    template_env = jinja2.Environment(loader=template_loader)
+    template = template_env.get_template("pdf.html")
+    output_text = template.render(context)
+
+    config = pdfkit.configuration(wkhtmltopdf="/usr/local/bin/wkhtmltopdf")
+
+    #custom filenames and directory path
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    output_filename = f"{patient_name}_{current_date}.pdf"
+    output_directory = f"patient_pdf"
+
+    output_path = os.path.join(output_directory, output_filename)
+
+    #making pdf and storing it in the output path
+    pdfkit.from_string(output_text, output_path, configuration=config)
 
 DEM_test()
 
