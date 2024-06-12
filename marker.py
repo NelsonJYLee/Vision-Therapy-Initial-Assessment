@@ -38,32 +38,32 @@ def find_differences(patient_numbers, answer_key):
         else:
             if dp[i][j] == dp[i - 1][j - 1] + 1:
                 differences.append(f"'{patient_numbers[i - 1]}' was substituted for '{answer_key[j - 1]}' at position {i-1}")
-                marked_numbers = marked_numbers[:i-1] + f"({marked_numbers[i-1]})" + marked_numbers[i:]
+                marked_numbers = marked_numbers[:i-1] + f"<span style='color: red;'>({marked_numbers[i-1]})</span>" + marked_numbers[i:]
                 sub_and_trans_err += 1
                 i -= 1
                 j -= 1
             elif dp[i][j] == dp[i - 1][j] + 1:
                 differences.append(f"'{patient_numbers[i - 1]}' was added at position {i-1}")
-                marked_numbers = marked_numbers[:i-1] + f"[{marked_numbers[i-1]}]"  + marked_numbers[i:]
+                marked_numbers = marked_numbers[:i-1] + f"<span style='color: red;'>[{marked_numbers[i-1]}]</span>"  + marked_numbers[i:]
                 add_err += 1
                 i -= 1
             elif dp[i][j] == dp[i][j - 1] + 1:
                 differences.append(f"'{answer_key[j - 1]}' is missing at position {i}")
-                marked_numbers = marked_numbers[:i] + "_" + marked_numbers[i:]
+                marked_numbers = marked_numbers[:i] + "<span style='color: red;'>_</span>" + marked_numbers[i:]
                 omi_err += 1
                 j -= 1
 
     #used when j == 0 and i > 0 
     while i > 0:
         differences.append(f"'{patient_numbers[i - 1]}' was added at position{i-1}")
-        marked_numbers = marked_numbers[:i-1] + f"[{marked_numbers[i-1]}]"  + marked_numbers[i:]
+        marked_numbers = marked_numbers[:i-1] + f"<span style='color: red;'>[{marked_numbers[i-1]}]</span>"  + marked_numbers[i:]
         add_err += 1
         i -= 1
 
     #used when i == 0 and j > 0
     while j > 0:
         differences.append(f"'{answer_key[j - 1]}' is missing at position {j-1}")
-        marked_numbers = marked_numbers[:j-1] + "_" + marked_numbers[j-1:]
+        marked_numbers = marked_numbers[:j-1] + "<span style='color: red;'>_</span>" + marked_numbers[j-1:]
         j -= 1
 
     return {"marked_numbers": marked_numbers,
@@ -75,4 +75,4 @@ def find_differences(patient_numbers, answer_key):
             "differences": differences[::-1]
             }
 
-    #should return, marked_numbers, errors, differences
+    

@@ -73,17 +73,17 @@
 
         <div class="sub-title">Test A</div>
         <p>Answer Key: {{ answer_key_1 }}</p>
-        <p>Patient Answers: {{ marker_results_1 }}</p>
+        <p>Patient Answers: {{ marker_results_1 | safe }}</p>
         <p>Duration: {{ rounded_duration_1 }} seconds</p>
 
         <div class="sub-title">Test B</div>
         <p>Answer Key: {{ answer_key_2 }}</p>
-        <p>Patient Answers: {{ marker_results_2 }}</p>
+        <p>Patient Answers: {{ marker_results_2 | safe }}</p>
         <p>Duration: {{ rounded_duration_2 }} seconds</p>
 
         <div class="sub-title">Test C</div>
         <p>Answer Key: {{ answer_key_3 }}</p>
-        <p>Patient Answers: {{ marker_results_3 }}</p>
+        <p>Patient Answers: {{ marker_results_3 | safe }}</p>
         <p>Duration: {{ rounded_duration_3 }} seconds</p>
 
         <div class="box">

@@ -28,7 +28,7 @@ def recognize_from_microphone():
     def recognized_cb(evt):
         nonlocal recognized_text
         if evt.result.reason == speechsdk.ResultReason.RecognizedSpeech:
-            recognized_text = evt.result.text
+            recognized_text += evt.result.text
         elif evt.result.reason == speechsdk.ResultReason.NoMatch:
             print("No speech could be recognized: {}".format(evt.result.no_match_details))
         elif evt.result.reason == speechsdk.ResultReason.Canceled:
@@ -56,9 +56,11 @@ def recognize_from_microphone():
         end_time = time.time()
         print("Stopping recognition...")
         duration = end_time - start_time
-        time.sleep(5)
+        time.sleep(2)
         speech_recognizer.stop_continuous_recognition()
     
     #dictionary with text and duration keys are returned
     return {"text":recognized_text, 
             "duration": duration}
+
+

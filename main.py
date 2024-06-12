@@ -93,6 +93,7 @@ def DEM_test():
 
     transcriber_result_2 = recognize_from_microphone()
     raw_string_2 = transcriber_result_2["text"]
+    print(f"raw string: {raw_string_2}")
     patient_numbers_2 = to_clean_string(raw_string_2)
     duration_2 = transcriber_result_2["duration"]
     rounded_duration_2 = round(duration_2)
@@ -127,6 +128,7 @@ def DEM_test():
 
     transcriber_result_3 = recognize_from_microphone()
     raw_string_3 = transcriber_result_3["text"]
+    print(f"raw string: {raw_string_3}")
     patient_numbers_3 = to_clean_string(raw_string_3)
     duration_3 = transcriber_result_3["duration"]
     rounded_duration_3 = round(duration_3)
