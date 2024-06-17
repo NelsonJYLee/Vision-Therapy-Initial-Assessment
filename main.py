@@ -40,7 +40,7 @@ def DEM_test():
     rounded_duration_1 = round(duration_1)
 
     #answer key to compare patient_numbers with
-    answer_key_1 = "3475529187255377446817447665327992339624"
+    answer_key_1 = "3759825746147637939245217537487465292364"
 
     #producing patient numbers to only have the numbers from raw_string
     def to_clean_string(raw_string):
@@ -97,7 +97,7 @@ def DEM_test():
     patient_numbers_2 = to_clean_string(raw_string_2)
     duration_2 = transcriber_result_2["duration"]
     rounded_duration_2 = round(duration_2)
-    answer_key_2 = "6739239912714467562352357744864357251978"
+    answer_key_2 = "6329174652537484521779392147632574637598"
 
     marker_results_2 = find_differences(patient_numbers_2, answer_key_2)
 
